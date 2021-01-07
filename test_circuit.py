@@ -13,8 +13,7 @@ q.addColumn()
 q.addGate("H",0,0)
 q.addColumn()
 q.addGate("CNOT",1,1,0)
-answer = q.runCircuit()
-print(answer)
+q.runCircuit()
 
 
 def superDenseCoding(message):
@@ -56,5 +55,4 @@ def superDenseCoding(message):
     
     return q.runCircuit()
 
-result = superDenseCoding("10")
-print(result)
+superDenseCoding("11")

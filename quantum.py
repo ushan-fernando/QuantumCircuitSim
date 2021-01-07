@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 import itertools
 
 class Qubit:
@@ -74,7 +75,18 @@ class QuantumCircuit:
             states = np.dot(multiKroneckerProduct(*self.columns[i]),states)
         possibilities = possibleStates(self.numberOfQubits)
         prob = calcProbability(states).flatten()
-        return [i for i in zip(possibilities,prob.real)]
+        self.visualize(possibilities,prob.real)
+
+    def visualize(self,possibilities,probalities):
+        plt.title("Quantum Circuit Simulation")
+        plt.bar(range(2**self.numberOfQubits),probalities)
+        plt.xticks(range(2**self.numberOfQubits),possibilities)
+        plt.ylim(-0,1)
+        plt.grid(True)
+        plt.ylabel(r'$P(|\psi\rangle)$')
+        plt.xlabel(r'$|\psi\rangle$')
+        plt.show()
+
 
 
 
