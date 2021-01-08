@@ -1,4 +1,4 @@
-#Quantum Circuit Simulator
+# Quantum Circuit Simulator
 
 This project is a simple quantum circuit simulator made using python.
 Currently supports the following gates:
