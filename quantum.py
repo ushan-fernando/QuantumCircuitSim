@@ -46,10 +46,10 @@ class QuantumCircuit:
                 pauliY = np.array([[0+0j,0-1j],[0+1j,0+0j]])
                 self.columns[columnNumber][qubitNumber] = pauliY
             elif gate == 'Z':
-                pauliZ = np.array([[1,0],[0,-1]])
+                pauliZ = np.array([[1+0j,0+0j],[0+0j,-1+0j]])
                 self.columns[columnNumber][qubitNumber] = pauliZ
             elif gate == 'H':
-                hadamard = 1/np.sqrt(2) * np.array([[1,1],[1,-1]])
+                hadamard = 1/np.sqrt(2) * np.array([[1+0j,1+0j],[1+0j,-1+0j]])
                 self.columns[columnNumber][qubitNumber] = hadamard
             else:
                 raise Exception("Given Gate Doesn't Exist")
