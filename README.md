@@ -38,6 +38,6 @@ pip install requirements.txt
 ```
 
 Download the python files and run the following command to check if everything works
-````
+```
 python test_circuit.py
 ```
