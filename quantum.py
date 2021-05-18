@@ -76,8 +76,8 @@ class QuantumCircuit:
             else:
                 raise Exception("Given Gate Doesn't Exist")
         
-        # For controlled gates such as CNOT we need to calculate its matrix representation given the
-        # control and target qubit. Then we add the matrix to the corresponding position in the column array
+        # For controlled gates such as CNOT and Toffoli we need to calculate its matrix representation given the
+        # control and target qubits. Then we add the matrix to the corresponding position in the column array
         if gate == "CNOT":
             identity = np.array([[1+0j,0+0j],[0+0j,1+0j]])
             pauliX = np.array([[0+0j,1+0j],[1+0j,0+0j]])
@@ -85,12 +85,30 @@ class QuantumCircuit:
             p1 = np.array([[0,0],[0,1]])
             a1 = [identity for _ in range(self.numberOfQubits)]
             a2 = [identity for _ in range(self.numberOfQubits)]
-            a1[control] = p0
-            a2[control] = p1
+            a1[control[0]] = p0
+            a2[control[0]] = p1
             a2[qubitNumber] = pauliX
             cnot = multiKroneckerProduct(*a1) + multiKroneckerProduct(*a2)
             self.columns[columnNumber] = [1 for _ in range(self.numberOfQubits)]
             self.columns[columnNumber][qubitNumber] = cnot
+
+        elif gate == "Toffoli":
+            identity = np.array([[1+0j,0+0j],[0+0j,1+0j]])
+            pauliX = np.array([[0+0j,1+0j],[1+0j,0+0j]])
+            p0 = np.array([[1,0],[0,0]])
+            p1 = np.array([[0,0],[0,1]])
+            combinations = [[p0,p0],[p0,p1],[p1,p0],[p1,p1]]
+            a = []
+            for _ in range(4):
+                a.append([identity for _ in range(self.numberOfQubits)])
+            for i in range(len(a)):
+                a[i][control[0]] = combinations[i][0]
+                a[i][control[1]] = combinations[i][1]
+                if(i == 3):
+                    a[i][qubitNumber] = pauliX
+            toffoli = multiKroneckerProduct(*a[0]) + multiKroneckerProduct(*a[1]) + multiKroneckerProduct(*a[2]) + multiKroneckerProduct(*a[3])
+            self.columns[columnNumber] = [1 for _ in range(self.numberOfQubits)]
+            self.columns[columnNumber][qubitNumber] = toffoli
 
     # Calculates the final state of the quamtum circuit after applying all the gates
     # It then calculates the probabilities of measuring each state and shows a visulisation

@@ -12,47 +12,21 @@ q = QuantumCircuit(2)
 q.addColumn()
 q.addGate("H",0,0)
 q.addColumn()
-q.addGate("CNOT",1,1,0)
+q.addGate("CNOT",1,1,[0])
 q.runCircuit()
 
-
-def superDenseCoding(message):
-    q = QuantumCircuit(2)
-    q.addColumn()
-    q.addGate("H",0,0)
-    q.addColumn()
-    q.addGate("CNOT",1,1,0)
-
-    if message == "00":
-        q.addColumn()
-        q.addColumn()
-        q.addGate("CNOT",2,1,0)
-        q.addColumn()
-        q.addGate("H",3,0)
-    elif message == "01":
-        q.addColumn()
-        q.addGate("X",2,0)
-        q.addColumn()
-        q.addGate("CNOT",3,1,0)
-        q.addColumn()
-        q.addGate("H",4,0)
-    elif message == "10":
-        q.addColumn()
-        q.addGate("Z",2,0)
-        q.addColumn()
-        q.addGate("CNOT",3,1,0)
-        q.addColumn()
-        q.addGate("H",4,0)
-    elif message == "11":
-        q.addColumn()
-        q.addGate("X",2,0)
-        q.addColumn()
-        q.addGate("Z",3,0)
-        q.addColumn()
-        q.addGate("CNOT",4,1,0)
-        q.addColumn()
-        q.addGate("H",5,0)
-    
-    return q.runCircuit()
-
-superDenseCoding("11")
+"""
+Below code implements the following circuit:
+|0> ---|X|----o---
+              |
+|0> ---|X|----o---
+              |
+|0> ---------|X|--
+"""
+q = QuantumCircuit(3)
+q.addColumn()
+q.addGate("X",0,0)
+q.addGate("X",0,1)
+q.addColumn()
+q.addGate("Toffoli",1,2,[0,1])
+q.runCircuit()
