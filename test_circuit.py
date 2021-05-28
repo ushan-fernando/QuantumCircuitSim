@@ -8,12 +8,10 @@ Bell State: Quantum Entaglement
 |0> ---------|X|--
 """
 
-q = QuantumCircuit(2)
-q.addColumn()
-q.addGate("H",0,0)
-q.addColumn()
-q.addGate("CNOT",1,1,[0])
-q.runCircuit()
+qc = QuantumCircuit(2)
+qc.h(0)
+qc.cnot(0,1)
+qc.runCircuit()
 
 """
 Below code implements the following circuit:
@@ -23,10 +21,8 @@ Below code implements the following circuit:
               |
 |0> ---------|X|--
 """
-q = QuantumCircuit(3)
-q.addColumn()
-q.addGate("X",0,0)
-q.addGate("X",0,1)
-q.addColumn()
-q.addGate("Toffoli",1,2,[0,1])
-q.runCircuit()
+qc = QuantumCircuit(3)
+qc.x(0)
+qc.x(1)
+qc.toffoli(0,1,2)
+qc.runCircuit()
