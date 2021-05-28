@@ -1,29 +1,30 @@
-# Quantum Circuit Simulator
+# | Quantum Circuit Simulator ⟩
 
 Simple quantum circuit simulator built using python3
 
-## Table of Contents
+## Table of Contents 📘
 * [Libraries](#libraries)
 * [Quantum Gates](#gates)
 * [Installation](#install)
 
 # <a name="libraries"></a>
-## Libraries
+## Libraries 💻
 The following libraries were used in this project:
 * Numpy
 * Matplotlib
 
 # <a name="gates"></a>
-## Quantum Gates
+## Quantum Gates ⚛️
 Currently supports the following gates:
 * Pauli-X
 * Pauli-Y
 * Pauli-Z
 * Hadamard
 * CNOT
+* Toffoli
 
 # <a name="install"></a>
-## Installation
+## Installation ✅
 On Windows Command Prompt:
 ```
 mkdir quantum
